@@ -33,7 +33,7 @@ public class DemoController {
         customerRepository.deleteById(id);
     }
 
-    @GetMapping("/update")
+    @PutMapping("/update")
     public String updateCustomer(@RequestParam String first, @RequestParam String last , @RequestParam Integer id) {
         Customer customer = customerRepository.findCustomerById(id);
 
@@ -41,7 +41,8 @@ public class DemoController {
             customer.setFirstName(first);
             customer.setLastName(last);
             customerRepository.save(customer);
+            return "Customer updated!" + customer.getFirstName() + " " + customer.getLastName() + " " + customer.getId();
         }
-        return "Customer updated!" + customer.getFirstName() + " " + customer.getLastName() + " " + customer.getId();
+        return "Customer not found!";
     }
 }
